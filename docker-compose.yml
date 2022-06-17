@@ -1,0 +1,17 @@
+version: "3"
+
+volumes:
+  esdata:
+    driver: local
+
+services:
+  elasticsearch:
+    container_name: elasticsearch
+    image: bitnami/elasticsearch
+    volumes:
+      - esdata:/bitnami/elasticsearch/data
+    logging:
+      driver: none
+    ports:
+      - 9300:9300
+      - 9200:9200
