@@ -1,2 +1,3 @@
 import jobTitlesController from "./job-titles.controller";
-export { jobTitlesController };
+import skillsController from "./skills.controller";
+export { jobTitlesController, skillsController };

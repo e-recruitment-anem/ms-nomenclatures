@@ -31,14 +31,14 @@ async function setItem(index: string, document: any) {
   }
 }
 
-async function getItems(index: string, query: string) {
+async function getItems(index: string, field: string, query: string) {
   try {
     return await esclient.search({
       index,
       search_type: "query_then_fetch",
 
       query: {
-        query_string: { default_field: "label", query: `*${query}*` },
+        query_string: { default_field: field, query: `*${query}*` },
         // match: { label: { query: query, fuzziness: "all" } },
       },
     });
@@ -64,4 +64,28 @@ async function getItemById(index: string, id: number) {
   }
 }
 
-export default { checkConnection, setItem, getItems, getItemById };
+async function getItemsByIds(index: string, ids: number[]) {
+  try {
+    return await esclient.search({
+      index,
+      search_type: "query_then_fetch",
+
+      query: {
+        bool: { should: [{ terms: { id: ids } }] },
+        // match: { id : [...ids] },
+        // match : {id : {query : }}
+      },
+    });
+  } catch (err) {
+    console.error(`An error occurred while creating the index ${index}:`);
+    console.error(err);
+  }
+}
+
+export default {
+  checkConnection,
+  setItem,
+  getItems,
+  getItemById,
+  getItemsByIds,
+};

@@ -20,6 +20,7 @@ const getJobTitles = async (
   const { label } = req.query;
   const { hits } = await elasticSearchHelper.getItems(
     "job-titles",
+    "label",
     String(label)
   );
   console.log(hits);
