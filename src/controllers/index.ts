@@ -1,4 +1,11 @@
 import jobTitlesController from "./job-titles.controller";
 import skillsController from "./skills.controller";
 import citiesController from "./cities.controller";
-export { jobTitlesController, skillsController, citiesController };
+import statesController from "./states.controller";
+
+export {
+  jobTitlesController,
+  skillsController,
+  citiesController,
+  statesController,
+};
