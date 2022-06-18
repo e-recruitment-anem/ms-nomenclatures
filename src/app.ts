@@ -4,7 +4,6 @@ import cors from "cors";
 import morgan from "morgan";
 import * as dotenv from "dotenv";
 import { Router } from "./routes";
-import errorMiddleware from "./middlewares/error.middleware";
 import elasticSearchHelper from "./helpers/elastic-search.helper";
 
 const app = express();
@@ -23,7 +22,7 @@ app.use(express.json());
 app.use(compression());
 app.use(cors());
 app.use("/api", Router);
-app.use(errorMiddleware);
+// app.use(errorMiddleware);
 
 const PORT = process.env.PORT || 6000;
 

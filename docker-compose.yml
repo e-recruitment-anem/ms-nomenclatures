@@ -3,15 +3,28 @@ version: "3"
 volumes:
   esdata:
     driver: local
-
+networks:
+  elastic-net:
+    name: elastic-net
+    driver: bridge
 services:
-  elasticsearch:
-    container_name: elasticsearch
+  elasticsearch-db:
+    container_name: elasticsearch-db
     image: bitnami/elasticsearch
-    volumes:
-      - esdata:/bitnami/elasticsearch/data
+
     logging:
       driver: none
     ports:
       - 9300:9300
       - 9200:9200
+  ms-nomenclatures:
+    container_name: ms-nomenclature-test
+    image: aymenzitouni/ms-nomenclatures:latest
+    logging:
+      driver: none
+    networks:
+      - elastic-net
+    ports:
+      - 6001:6000
+    environment:
+      ELASTIC_URL: "elastic-net:9200"
